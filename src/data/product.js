@@ -29,7 +29,7 @@ import ButterflyImage from "../assets/stickers/Butterfly.png";
 import IWon_tHesitateStickerImage from "../assets/stickers/IWon_tHesitateSticker.png";
 import EvilEyeImage from "../assets/stickers/EvilEye.png";
 
-const products = [
+export const products = [
   {
     productId: 1,
     name: "Developer",
@@ -271,5 +271,3 @@ const products = [
     imageUrl: EvilEyeImage,
   },
 ];
-
-export default products;
