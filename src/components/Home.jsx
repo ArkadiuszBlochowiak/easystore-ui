@@ -1,6 +1,5 @@
 import PageHeading from "./heading/PageHeading";
 import ProductListing from "./product/ProductListing";
-// import { products } from "../data/product";
 import apiClients from "../api/apiClient";
 import { useState, useEffect } from "react";
 
