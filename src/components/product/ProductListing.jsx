@@ -1,7 +1,6 @@
 import ProductCard from "./ProductCard";
 
 export default function ProductListing({ products }) {
-  console.log(products);
   return (
     <div className="product-listings-container">
       <div className="product-listings-grid">
