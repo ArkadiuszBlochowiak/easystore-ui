@@ -3,25 +3,55 @@ import SearchBox from "../actions/SearchBox";
 import ProductCard from "./ProductCard";
 import { useState } from "react";
 
-const sortList = ["Popularity", "Price Low to High", "Price High to Low"];
+const sortListOptions = [
+  "Popularity",
+  "Price Low to High",
+  "Price High to Low",
+];
 
 export default function ProductListing({ products }) {
   const [searchPhrase, setSearchPhrase] = useState("");
-  const [filteredList, setFilteredList] = useState([...products]);
+  const [sortMethod, setSortMethod] = useState("Popularity");
 
-  function filterList(phrase = "") {
+  function filterList(phrase) {
     setSearchPhrase(phrase);
+  }
 
-    if (products.length > 0 && phrase != "") {
-      setFilteredList(
-        [...products].filter(
-          (product) =>
-            product.name.toLowerCase().includes(phrase.toLowerCase()) ||
-            product.description.toLowerCase().includes(phrase.toLowerCase()),
-        ),
+  function sortList(option) {
+    setSortMethod(option);
+  }
+
+  let filteredList = Array.isArray(products)
+    ? [...products].filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchPhrase.toLowerCase()) ||
+          product.description
+            .toLowerCase()
+            .includes(searchPhrase.toLowerCase()),
+      )
+    : [];
+
+  switch (sortMethod) {
+    case "Price Low to High": {
+      filteredList.sort(
+        (a, b) =>
+          parseFloat(a.price) - parseFloat(b.price) ||
+          a.name.localeCompare(b.name),
       );
-    } else {
-      setFilteredList([...products]);
+      break;
+    }
+    case "Price High to Low": {
+      filteredList.sort(
+        (a, b) =>
+          parseFloat(b.price) - parseFloat(a.price) ||
+          a.name.localeCompare(b.name),
+      );
+      break;
+    }
+    default: {
+      filteredList.sort(
+        (a, b) => b.popularity - a.popularity || a.name.localeCompare(b.name),
+      );
     }
   }
 
@@ -34,7 +64,12 @@ export default function ProductListing({ products }) {
           value={searchPhrase}
           onSearch={filterList}
         />
-        <Dropdown label="Sort by" options={sortList} value="Popularity" />
+        <Dropdown
+          label="Sort by"
+          options={sortListOptions}
+          value={sortMethod}
+          onSort={sortList}
+        />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-6 py-12">
         {filteredList.length > 0 ? (
