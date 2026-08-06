@@ -2,6 +2,7 @@ import Dropdown from "../actions/Dropdown";
 import SearchBox from "../actions/SearchBox";
 import ProductCard from "./ProductCard";
 import { useMemo, useState } from "react";
+import { setListOrder } from "../../utils/utils";
 
 const sortListOptions = [
   "Popularity",
@@ -23,42 +24,6 @@ export default function ProductListing({ products }) {
 
   function sortList(option) {
     setSortMethod(option);
-  }
-
-  function setListOrder(phrase, method, list) {
-    if (phrase != "") {
-      list = list.filter(
-        (product) =>
-          product.name.toLowerCase().includes(phrase.toLowerCase()) ||
-          product.description.toLowerCase().includes(phrase.toLowerCase()),
-      );
-    }
-
-    switch (method) {
-      case "Price Low to High": {
-        list.sort(
-          (a, b) =>
-            parseFloat(a.price) - parseFloat(b.price) ||
-            a.name.localeCompare(b.name),
-        );
-        break;
-      }
-      case "Price High to Low": {
-        list.sort(
-          (a, b) =>
-            parseFloat(b.price) - parseFloat(a.price) ||
-            a.name.localeCompare(b.name),
-        );
-        break;
-      }
-      default: {
-        list.sort(
-          (a, b) => b.popularity - a.popularity || a.name.localeCompare(b.name),
-        );
-      }
-    }
-
-    return list;
   }
 
   return (
