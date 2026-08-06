@@ -11,29 +11,24 @@ export function setListOrder(phrase, method, list) {
     );
   }
 
-  switch (method) {
-    case "Price Low to High": {
-      list.sort(
-        (a, b) =>
+  list.sort((a, b) => {
+    switch (method) {
+      case "Price Low to High":
+        return (
           parseFloat(a.price) - parseFloat(b.price) ||
-          a.name.localeCompare(b.name),
-      );
-      break;
-    }
-    case "Price High to Low": {
-      list.sort(
-        (a, b) =>
+          a.name.localeCompare(b.name)
+        );
+
+      case "Price High to Low":
+        return (
           parseFloat(b.price) - parseFloat(a.price) ||
-          a.name.localeCompare(b.name),
-      );
-      break;
+          a.name.localeCompare(b.name)
+        );
+
+      default:
+        return b.popularity - a.popularity || a.name.localeCompare(b.name);
     }
-    default: {
-      list.sort(
-        (a, b) => b.popularity - a.popularity || a.name.localeCompare(b.name),
-      );
-    }
-  }
+  });
 
   return list;
 }
