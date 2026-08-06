@@ -27,18 +27,20 @@ export default function Home() {
     }
   };
 
+  const customStateClass = "flex items-center justify-center min-h-screen";
+
   if (loading) {
     return (
-      <div>
-        <span>Loading products...</span>
+      <div className={customStateClass}>
+        <span className="text-xl font-semibold">Loading products...</span>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div>
-        <span>Error: {error}</span>
+      <div className={customStateClass}>
+        <span className="text-xl text-red-500">Error: {error}</span>
       </div>
     );
   }
