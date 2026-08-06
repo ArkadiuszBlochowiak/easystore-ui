@@ -1,7 +1,7 @@
 import Dropdown from "../actions/Dropdown";
 import SearchBox from "../actions/SearchBox";
 import ProductCard from "./ProductCard";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const sortListOptions = [
   "Popularity",
@@ -12,8 +12,12 @@ const sortListOptions = [
 export default function ProductListing({ products }) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [sortMethod, setSortMethod] = useState("Popularity");
+  const filteredList = useMemo(
+    () => setListOrder(searchPhrase, sortMethod, [...products]),
+    [products, searchPhrase, sortMethod],
+  );
 
-  function filterList(phrase) {
+  function filterList(phrase = "") {
     setSearchPhrase(phrase);
   }
 
@@ -21,38 +25,40 @@ export default function ProductListing({ products }) {
     setSortMethod(option);
   }
 
-  let filteredList = Array.isArray(products)
-    ? [...products].filter(
+  function setListOrder(phrase, method, list) {
+    if (phrase != "") {
+      list = list.filter(
         (product) =>
-          product.name.toLowerCase().includes(searchPhrase.toLowerCase()) ||
-          product.description
-            .toLowerCase()
-            .includes(searchPhrase.toLowerCase()),
-      )
-    : [];
+          product.name.toLowerCase().includes(phrase.toLowerCase()) ||
+          product.description.toLowerCase().includes(phrase.toLowerCase()),
+      );
+    }
 
-  switch (sortMethod) {
-    case "Price Low to High": {
-      filteredList.sort(
-        (a, b) =>
-          parseFloat(a.price) - parseFloat(b.price) ||
-          a.name.localeCompare(b.name),
-      );
-      break;
+    switch (method) {
+      case "Price Low to High": {
+        list.sort(
+          (a, b) =>
+            parseFloat(a.price) - parseFloat(b.price) ||
+            a.name.localeCompare(b.name),
+        );
+        break;
+      }
+      case "Price High to Low": {
+        list.sort(
+          (a, b) =>
+            parseFloat(b.price) - parseFloat(a.price) ||
+            a.name.localeCompare(b.name),
+        );
+        break;
+      }
+      default: {
+        list.sort(
+          (a, b) => b.popularity - a.popularity || a.name.localeCompare(b.name),
+        );
+      }
     }
-    case "Price High to Low": {
-      filteredList.sort(
-        (a, b) =>
-          parseFloat(b.price) - parseFloat(a.price) ||
-          a.name.localeCompare(b.name),
-      );
-      break;
-    }
-    default: {
-      filteredList.sort(
-        (a, b) => b.popularity - a.popularity || a.name.localeCompare(b.name),
-      );
-    }
+
+    return list;
   }
 
   return (
