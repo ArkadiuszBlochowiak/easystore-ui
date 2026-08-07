@@ -1,10 +1,10 @@
-import Footer from "./components/footer/Footer";
+import Footer from "./components/Footer";
 import Header from "./components/header/Header";
 import Home from "./components/Home";
 
 function App() {
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-normalbg dark:bg-darkbg min-h-screen">
       <Header />
       <Home />
       <Footer />
