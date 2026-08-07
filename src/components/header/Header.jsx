@@ -6,6 +6,7 @@ import {
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const navLinkClass =
@@ -14,37 +15,37 @@ export default function Header() {
   return (
     <header className="border-b border-gray-300 dark:border-gray-600 sticky top-0 z-20 bg-normalbg dark:bg-darkbg">
       <div className="flex items-center justify-between mx-auto max-w-6xl px-6 py-4">
-        <a href="/" className={navLinkClass}>
+        <NavLink to="/" className={navLinkClass}>
           <FontAwesomeIcon icon={faTags} className="h-8 w-8" />
           <span className="font-bold">Eazy Stickers</span>
-        </a>
+        </NavLink>
         <nav className="flex items-center py-2 z-10">
           <DarkModeSwitch />
           <ul className="flex space-x-6">
             <li>
-              <a href="/" className={navLinkClass}>
+              <NavLink to="/" className={navLinkClass}>
                 Home
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/about" className={navLinkClass}>
+              <NavLink to="/about" className={navLinkClass}>
                 About
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/contact" className={navLinkClass}>
+              <NavLink to="/contact" className={navLinkClass}>
                 Contact
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/login" className={navLinkClass}>
+              <NavLink to="/login" className={navLinkClass}>
                 Login
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/cart" className="text-primary py-2 dark:text-light">
+              <NavLink to="/cart" className="text-primary py-2 dark:text-light">
                 <FontAwesomeIcon icon={faShoppingBasket} />
-              </a>
+              </NavLink>
             </li>
           </ul>
         </nav>
