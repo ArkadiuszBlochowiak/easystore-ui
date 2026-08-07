@@ -5,7 +5,7 @@ import {
   faMoon,
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const navLinkClass =
@@ -54,18 +54,21 @@ export default function Header() {
 }
 
 function DarkModeSwitch() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
 
   const toggleTheme = () => {
-    const newValue = theme === "dark" ? "light" : "dark";
-    setTheme(newValue);
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
 
-    if (newValue === "dark") {
+  useEffect(() => {
+    if (theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  };
+  }, [theme]);
 
   return (
     <div className="flex items-center py-2 z-10">
