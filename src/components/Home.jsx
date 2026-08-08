@@ -27,7 +27,7 @@ export default function Home() {
     }
   };
 
-  const customStateClass = "flex items-center justify-center min-h-screen";
+  const customStateClass = "flex grow items-center justify-center";
 
   if (loading) {
     return (

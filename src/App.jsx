@@ -4,7 +4,7 @@ import Header from "./components/header/Header";
 
 function App() {
   return (
-    <div className="bg-normalbg dark:bg-darkbg min-h-screen">
+    <div className="bg-normalbg dark:bg-darkbg min-h-screen flex flex-col">
       <Header />
       <Outlet />
       <Footer />

@@ -14,7 +14,7 @@ export default function ErrorPage() {
   return (
     <div className="flex flex-col min-h-screen bg-normalbg dark:bg-darkbg">
       <Header />
-      <main className="grow py-12  font-primary">
+      <main className="grow py-12 font-primary">
         <div className="max-w-4xl mx-auto px-4">
           <PageTitle title={errorTitle} />
         </div>
