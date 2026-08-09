@@ -1,6 +1,7 @@
 import PageTitle from "../../../components/heading/PageTitle";
 import { useEffect, useRef } from "react";
 import { Form, useActionData, useNavigation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Contact() {
   const actionData = useActionData();
@@ -13,6 +14,7 @@ export default function Contact() {
     console.log(formRef.current);
     if (actionData?.success) {
       formRef.current?.reset();
+      toast.success("Your message has been submitted successfully!");
     }
   }, [actionData]);
 
