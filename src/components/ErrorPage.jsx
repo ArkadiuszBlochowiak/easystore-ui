@@ -8,8 +8,9 @@ import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
   const routeError = useRouteError();
-  const errorTitle = routeError.status;
-  const errorMessage = routeError.data;
+  const errorTitle = routeError?.status || "Oops! Something went wrong";
+  const errorMessage =
+    routeError?.data || "An unexpected error occurred. Please try again later";
 
   return (
     <div className="flex flex-col min-h-screen bg-normalbg dark:bg-darkbg">

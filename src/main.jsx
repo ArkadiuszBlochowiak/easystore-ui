@@ -7,7 +7,7 @@ import About from "./components/About.jsx";
 import Contact from "./components/Contact.jsx";
 import Login from "./components/Login.jsx";
 import Cart from "./components/Cart.jsx";
-import Home from "./components/Home.jsx";
+import Home, { productsLoader } from "./components/Home.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 
 const router = createBrowserRouter([
@@ -19,6 +19,7 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+        loader: productsLoader,
       },
       {
         path: "about",
