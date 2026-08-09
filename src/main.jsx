@@ -7,7 +7,8 @@ import About from "./components/About.jsx";
 import Contact from "./components/Contact.jsx";
 import Login from "./components/Login.jsx";
 import Cart from "./components/Cart.jsx";
-import Home, { productsLoader } from "./components/Home.jsx";
+import Home from "./features/home/components/Home.jsx";
+import { productsLoader } from "./features/home/utils/utils.js";
 import ErrorPage from "./components/ErrorPage.jsx";
 
 const router = createBrowserRouter([

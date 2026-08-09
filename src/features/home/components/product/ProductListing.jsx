@@ -1,5 +1,5 @@
-import Dropdown from "../actions/Dropdown";
-import SearchBox from "../actions/SearchBox";
+import Dropdown from "../../../../components/actions/Dropdown";
+import SearchBox from "../../../../components/actions/SearchBox";
 import ProductCard from "./ProductCard";
 import { useMemo, useState } from "react";
 import { setListOrder } from "../../utils/utils";

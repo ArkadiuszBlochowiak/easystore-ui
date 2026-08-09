@@ -1,3 +1,17 @@
+import apiClients from "../../../api/apiClient";
+
+export async function productsLoader() {
+  try {
+    const response = await apiClients.get("/products");
+    return response.data;
+  } catch (error) {
+    throw new Response(
+      error.message || "Failed to fetch products. Please try again.",
+      { status: error.status || 500 },
+    );
+  }
+}
+
 export function setListOrder(phrase, method, list) {
   if (!Array.isArray(list)) {
     return [];

@@ -1,6 +1,5 @@
-import PageHeading from "./heading/PageHeading";
+import PageHeading from "../../../components/heading/PageHeading";
 import ProductListing from "./product/ProductListing";
-import apiClients from "../api/apiClient";
 import { useLoaderData } from "react-router-dom";
 
 export default function Home() {
@@ -15,16 +14,4 @@ export default function Home() {
       <ProductListing products={products} />
     </div>
   );
-}
-
-export async function productsLoader() {
-  try {
-    const response = await apiClients.get("/products");
-    return response.data;
-  } catch (error) {
-    throw new Response(
-      error.message || "Failed to fetch products. Please try again.",
-      { status: error.status || 500 },
-    );
-  }
 }
