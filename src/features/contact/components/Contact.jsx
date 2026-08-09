@@ -1,4 +1,4 @@
-import PageTitle from "./heading/PageTitle";
+import PageTitle from "../../../components/heading/PageTitle";
 import { useRef } from "react";
 import { Form } from "react-router-dom";
 
@@ -63,8 +63,8 @@ export default function Contact() {
               name="mobileNumber"
               type="tel"
               required
-              pattern="^\d{10}$"
-              title="Mobile number must be exactly 10 digits"
+              pattern="^\d{9}$"
+              title="Mobile number must be exactly 9 digits"
               placeholder="Your mobile number"
               className={textFieldStyle}
             />
