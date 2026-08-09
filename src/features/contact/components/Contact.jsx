@@ -1,9 +1,20 @@
 import PageTitle from "../../../components/heading/PageTitle";
-import { useRef } from "react";
-import { Form } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Form, useActionData, useNavigation } from "react-router-dom";
 
 export default function Contact() {
+  const actionData = useActionData();
   const formRef = useRef(null);
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
+  useEffect(() => {
+    console.log(actionData);
+    console.log(formRef.current);
+    if (actionData?.success) {
+      formRef.current?.reset();
+    }
+  }, [actionData]);
 
   const labelStyle =
     "block text-lg font-semibold text-primary dark:text-light mb-2";
@@ -91,9 +102,10 @@ export default function Contact() {
         <div className="text-center">
           <button
             type="submit"
+            disabled={isSubmitting}
             className="px-6 py-2 text-white dark:text-black text-xl rounded-md transition duration-200 bg-primary dark:bg-light hover:bg-dark dark:hover:bg-lighter"
           >
-            Submit
+            {isSubmitting ? "Submitting" : "Submit"}
           </button>
         </div>
       </Form>
