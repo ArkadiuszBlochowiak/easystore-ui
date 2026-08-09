@@ -11,6 +11,7 @@ import Home from "./features/home/components/Home.jsx";
 import { productsLoader } from "./features/home/utils/utils.js";
 import ErrorPage from "./components/ErrorPage.jsx";
 import { contactAction } from "./features/contact/utils/utils.js";
+import ProductDetail from "./features/home/components/product/ProductDetail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         Component: Cart,
+      },
+      {
+        path: "products/:productId",
+        Component: ProductDetail,
       },
     ],
   },
