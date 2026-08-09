@@ -14,6 +14,25 @@ export default function ProductDetail() {
 
   const product = location.state?.product;
 
+  const zoomRef = useRef(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [backgroundPosition, setBackgroundPosition] = useState("center");
+
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } =
+      zoomRef.current.getBoundingClientRect();
+    const x = ((e.pageX - left) / width) * 100;
+    const y = ((e.pageY - top) / height) * 100;
+    setBackgroundPosition(`${x}% ${y}%`);
+  };
+
+  const handleMouseEnter = () => setIsHovering(true);
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setBackgroundPosition("center");
+  };
+
   const handleViewCart = () => navigate("/cart");
 
   return (
@@ -21,9 +40,15 @@ export default function ProductDetail() {
       <div className="max-w-5xl w-full mx-auto flex flex-col md:flex-row md:space-x-8 px-6 p-8">
         {/* Product Image with Zoom Effect */}
         <div
+          ref={zoomRef}
+          onMouseMove={isHovering ? handleMouseMove : null}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           className="w-full md:w-1/2 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg overflow-hidden bg-cover"
           style={{
             backgroundImage: `url(${product.imageUrl})`,
+            backgroundSize: isHovering ? "200%" : "cover",
+            backgroundPosition: backgroundPosition,
           }}
         >
           <img
