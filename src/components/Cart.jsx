@@ -1,7 +1,14 @@
 import PageTitle from "./heading/PageTitle";
 import emptyCartImage from "../assets/util/emptycart.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="grow min-h-213 py-12 bg-normalbg dark:bg-darkbg font-primary">
       <div className="max-w-4xl mx-auto px-4">
@@ -15,7 +22,10 @@ export default function Cart() {
             alt="Empty Cart"
             className="max-w-75 mx-auto mb-6 dark:bg-light dark:rounded-md"
           />
-          <button className="py-2 px-4 bg-primary dark:bg-light text-white dark:text-black text-xl font-semibold rounded-sm flex justify-center items-center hover:bg-dark dark:hover:bg-lighter transition">
+          <button
+            onClick={handleClick}
+            className="py-2 px-4 bg-primary dark:bg-light text-white dark:text-black text-xl font-semibold rounded-sm flex justify-center items-center hover:bg-dark dark:hover:bg-lighter transition"
+          >
             Back to Products
           </button>
         </div>
