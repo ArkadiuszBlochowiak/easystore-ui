@@ -75,6 +75,11 @@ export default function Contact() {
             minLength={5}
             maxLength={30}
           />
+          {actionData?.errors?.name && (
+            <p className="text-red-500 text-sm mt-1">
+              {actionData.errors.name}
+            </p>
+          )}
         </div>
 
         {/* Email and mobile Row */}
@@ -91,6 +96,11 @@ export default function Contact() {
               className={textFieldStyle}
               required
             />
+            {actionData?.errors?.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {actionData.errors.email}
+              </p>
+            )}
           </div>
 
           {/* Mobile Field */}
@@ -107,6 +117,11 @@ export default function Contact() {
               placeholder="Your mobile number"
               className={textFieldStyle}
             />
+            {actionData?.errors?.mobileNumber && (
+              <p className="text-red-500 text-sm mt-1">
+                {actionData.errors.mobileNumber}
+              </p>
+            )}
           </div>
         </div>
 
@@ -124,6 +139,11 @@ export default function Contact() {
             minLength={5}
             maxLength={500}
           ></textarea>
+          {actionData?.errors?.message && (
+            <p className="text-red-500 text-sm mt-1">
+              {actionData.errors.message}
+            </p>
+          )}
         </div>
 
         {/* Submit Button */}

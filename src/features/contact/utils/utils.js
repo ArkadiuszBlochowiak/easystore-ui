@@ -14,6 +14,12 @@ export async function contactAction({ request, params }) {
     await apiClient.post("/contacts", contactData);
     return { success: true };
   } catch (error) {
+    if (error.response?.status === 400) {
+      return {
+        success: false,
+        errors: error.response?.data,
+      };
+    }
     throw new Response(
       error.response?.data?.errorMessage ||
         error.message ||
