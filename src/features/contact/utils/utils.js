@@ -15,7 +15,9 @@ export async function contactAction({ request, params }) {
     return { success: true };
   } catch (error) {
     throw new Response(
-      error.message || "Failed to save contact. Please try again.",
+      error.response?.data?.errorMessage ||
+        error.message ||
+        "Failed to save contact. Please try again.",
       { status: error.status || 500 },
     );
   }
