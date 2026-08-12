@@ -7,11 +7,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { CartContext } from "../../store/cart-context";
+import { useCart } from "../../store/cart-context";
 
 export default function Header() {
-  const { totalQuantity } = useContext(CartContext);
+  const { totalQuantity } = useCart();
 
   const navLinkClass =
     "text-center text-lg font-primary font-semibold text-primary py-2 dark:text-light hover:text-dark dark:hover:text-lighter";
