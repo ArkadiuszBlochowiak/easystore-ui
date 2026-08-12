@@ -7,8 +7,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../../store/cart-context";
 
 export default function Header() {
+  const { totalQuantity } = useContext(CartContext);
+
   const navLinkClass =
     "text-center text-lg font-primary font-semibold text-primary py-2 dark:text-light hover:text-dark dark:hover:text-lighter";
 
@@ -46,8 +50,14 @@ export default function Header() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/cart" className="text-primary py-2 dark:text-light">
+              <NavLink
+                to="/cart"
+                className="relative text-primary py-2 dark:text-light"
+              >
                 <FontAwesomeIcon icon={faShoppingBasket} />
+                <div className="absolute -top-2 -right-6 text-xs bg-yellow-400 text-black font-semibold rounded-full px-2 py-1 leading-none">
+                  {totalQuantity}
+                </div>
               </NavLink>
             </li>
           </ul>
