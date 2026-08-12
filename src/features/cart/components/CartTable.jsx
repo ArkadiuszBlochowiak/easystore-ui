@@ -10,9 +10,7 @@ export default function CartTable() {
     .reduce((acc, item) => acc + item.price * item.quantity, 0)
     .toFixed(2);
 
-  const updateCartQuantity = (productId, quantity) => {
-    console.log(quantity);
-    const product = cart.find((item) => item.productId === productId);
+  const updateCartQuantity = (product, quantity) => {
     addToCart(product, quantity - (product?.quantity || 0));
   };
 
@@ -55,10 +53,7 @@ export default function CartTable() {
                   inputMode="numeric"
                   value={item.quantity}
                   onChange={(e) =>
-                    updateCartQuantity(
-                      item.productId,
-                      parseInt(e.target.value, 10) || 1,
-                    )
+                    updateCartQuantity(item, parseInt(e.target.value, 10) || 1)
                   }
                   className="w-16 px-2 py-1 border rounded-md focus:ring focus:ring-light dark:focus:ring-gray-600 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 />
