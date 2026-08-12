@@ -16,8 +16,6 @@ export default function Contact() {
   const isSubmitting = navigation.state === "submitting";
 
   useEffect(() => {
-    console.log(actionData);
-    console.log(formRef.current);
     if (actionData?.success) {
       formRef.current?.reset();
       toast.success("Your message has been submitted successfully!");
