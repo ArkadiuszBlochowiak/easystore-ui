@@ -6,12 +6,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./components/About.jsx";
 import Contact from "./features/contact/components/Contact.jsx";
 import Login from "./components/Login.jsx";
-import Cart from "./components/Cart.jsx";
+import Cart from "./features/cart/components/Cart.jsx";
 import Home from "./features/home/components/Home.jsx";
 import { productsLoader } from "./features/home/utils/utils.js";
 import ErrorPage from "./components/ErrorPage.jsx";
 import { contactAction } from "./features/contact/utils/utils.js";
 import ProductDetail from "./features/home/components/product/ProductDetail.jsx";
+import { CartProvider } from "./store/cart-context";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
   </StrictMode>,
 );
