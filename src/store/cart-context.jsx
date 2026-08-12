@@ -1,15 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-// const initialCartContext = {
-//   cart: [],
-//   setCart: () => {},
-//   addToCart: (product) => {
-//     console.log("Product added to cart: " + product.name);
-//   },
-//   removeFromCart: () => {},
-//   totalQuantity: 0,
-// };
-
 export const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
@@ -55,15 +45,6 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (productId) => {
     setCart((prevCart) => {
-      //   const existingItemIndex = prevCart.findIndex(
-      //     (item) => item.productId === productId,
-      //   );
-
-      //   if (existingItemIndex) {
-      //     return prevCart.splice(existingItemIndex, 1);
-      //   }
-
-      //   return prevCart;
       return prevCart.filter((item) => item.productId !== productId);
     });
   };
