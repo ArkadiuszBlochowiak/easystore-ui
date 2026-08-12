@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Price from "./Price";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../../../store/cart-context";
 
 export default function ProductCard({ product }) {
+  const { addToCart } = useContext(CartContext);
+
   return (
     <Link
       to={`/products/${product.productId}`}
@@ -27,6 +30,15 @@ export default function ProductCard({ product }) {
           <div className="bg-lighter dark:bg-light text-primary font-medium text-sm py-2 px-4 rounded-tl-md">
             <Price currency="$" price={product.price} />
           </div>
+          <button
+            className="bg-primary dark:bg-light text-white dark:text-primary font-medium text-sm py-2 px-4 rounded-md hover:cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              addToCart(product);
+            }}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </Link>
