@@ -30,7 +30,7 @@ export default function ProductCard({ product }) {
             <Price currency="$" price={product.price} />
           </div>
           <button
-            className="bg-primary dark:bg-light text-white dark:text-primary font-medium text-sm py-2 px-4 rounded-md hover:cursor-pointer"
+            className="bg-primary dark:bg-light text-white dark:text-primary font-medium text-sm py-2 px-4 rounded-md hover:cursor-pointer hover:bg-dark dark:hover:bg-lighter transition"
             onClick={(e) => {
               e.preventDefault();
               addToCart(product, 1);
