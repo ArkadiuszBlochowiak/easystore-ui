@@ -48,7 +48,7 @@ export default function ProductListing({ products }) {
             <ProductCard key={product.productId} product={product} />
           ))
         ) : (
-          <p className="text-center font-primary font-bold text-xl text-primary col-span-3">
+          <p className="text-center font-primary font-bold text-xl text-primary col-span-3 dark:text-light pt-16">
             No products found
           </p>
         )}
