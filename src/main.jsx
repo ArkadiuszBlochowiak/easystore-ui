@@ -16,6 +16,10 @@ import { CartProvider } from "./store/cart-context";
 import { AuthProvider } from "./store/auth-context.jsx";
 import CheckoutForm from "./components/CheckoutForm.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Profile from "./components/Profile.jsx";
+import Orders from "./components/Orders.jsx";
+import AdminOrders from "./components/admin/AdminOrders.jsx";
+import Messages from "./components/admin/Messages.jsx";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +60,22 @@ const router = createBrowserRouter([
           {
             path: "checkout",
             Component: CheckoutForm,
+          },
+          {
+            path: "profile",
+            Component: Profile,
+          },
+          {
+            path: "orders",
+            Component: Orders,
+          },
+          {
+            path: "admin/orders",
+            Component: AdminOrders,
+          },
+          {
+            path: "admin/messages",
+            Component: Messages,
           },
         ],
       },
