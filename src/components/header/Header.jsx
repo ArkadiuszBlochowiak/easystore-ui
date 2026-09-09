@@ -4,10 +4,12 @@ import {
   faTags,
   faMoon,
   faSun,
+  faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../store/cart-context";
+import { useAuth } from "../../store/auth-context";
 
 export default function Header() {
   const { totalQuantity } = useCart();
@@ -44,9 +46,10 @@ export default function Header() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/login" className={activeLinkClass}>
-                Login
-              </NavLink>
+              <LoginMenu
+                navLinkClass={navLinkClass}
+                activeLinkClass={activeLinkClass}
+              />
             </li>
             <li>
               <NavLink
@@ -96,5 +99,88 @@ function DarkModeSwitch() {
         />
       </button>
     </div>
+  );
+}
+
+function LoginMenu({ navLinkClass, activeLinkClass }) {
+  const { isAuthenticated } = useAuth();
+
+  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const [isAdminMenuOpen, setAdminMenuOpen] = useState(false);
+
+  const toggleUserMenu = () => setUserMenuOpen((prev) => !prev);
+  const toggleAdminMenu = () => setAdminMenuOpen((prev) => !prev);
+
+  const dropdownLinkClass =
+    "block w-full text-left px-4 py-2 text-lg font-primary font-semibold text-primary dark:text-light hover:bg-gray-100 dark:hover:bg-gray-600";
+
+  return (
+    <>
+      {isAuthenticated ? (
+        <div className="relative">
+          <button
+            className="relative text-primary cursor-pointer"
+            onClick={toggleUserMenu}
+          >
+            <span className={navLinkClass}>Hello John Doe</span>
+            <FontAwesomeIcon
+              icon={faAngleDown}
+              className="text-primary dark:text-light w-6 h-6"
+            />
+          </button>
+          {isUserMenuOpen && (
+            <div className="absolute right-0 w-48 bg-normalbg dark:bg-darkbg border border-gray-300 dark:border-gray-600 rounded-md shadow-lg z-20 transition ease-in-out duration-200">
+              <ul className="py-2">
+                <li>
+                  <Link to="/profile" className={dropdownLinkClass}>
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/orders" className={dropdownLinkClass}>
+                    Orders
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    className={`${dropdownLinkClass} flex items-center justify-between cursor-pointer`}
+                    onClick={toggleAdminMenu}
+                  >
+                    Admin
+                    <FontAwesomeIcon icon={faAngleDown} />
+                  </button>
+                  {isAdminMenuOpen && (
+                    <ul className="ml-4 space-y-2">
+                      <li>
+                        <Link to="/admin/orders" className={dropdownLinkClass}>
+                          Orders
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/admin/messages"
+                          className={dropdownLinkClass}
+                        >
+                          Messages
+                        </Link>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+                <li>
+                  <Link to="/" className={dropdownLinkClass}>
+                    Logout
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+      ) : (
+        <NavLink to="/login" className={activeLinkClass}>
+          Login
+        </NavLink>
+      )}
+    </>
   );
 }
