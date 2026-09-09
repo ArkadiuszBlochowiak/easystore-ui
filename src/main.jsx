@@ -13,6 +13,7 @@ import ErrorPage from "./components/ErrorPage.jsx";
 import { contactAction } from "./features/contact/utils/utils.js";
 import ProductDetail from "./features/home/components/product/ProductDetail.jsx";
 import { CartProvider } from "./store/cart-context";
+import { AuthProvider } from "./store/auth-context.jsx";
 
 const router = createBrowserRouter([
   {
@@ -53,8 +54,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </AuthProvider>
   </StrictMode>,
 );

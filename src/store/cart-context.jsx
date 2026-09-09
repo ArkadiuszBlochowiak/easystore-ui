@@ -10,7 +10,7 @@ export const CartProvider = ({ children }) => {
       const storedCart = localStorage.getItem("cart");
       return storedCart ? JSON.parse(storedCart) : [];
     } catch {
-      console.error("Failed to parse cart from localStoreage: " + error);
+      console.error("Failed to parse cart from localStorage: " + error);
       return [];
     }
   });
@@ -21,7 +21,7 @@ export const CartProvider = ({ children }) => {
     try {
       localStorage.setItem("cart", JSON.stringify(cart));
     } catch {
-      console.error("Failed to save cart to localStoreage: " + error);
+      console.error("Failed to save cart to localStorage: " + error);
     }
   }, [cart]);
 
