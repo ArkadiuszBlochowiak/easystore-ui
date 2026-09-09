@@ -6,7 +6,7 @@ import {
   faSun,
   faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../../store/cart-context";
 import { useAuth } from "../../store/auth-context";
@@ -108,6 +108,7 @@ function LoginMenu({ navLinkClass, activeLinkClass }) {
   const isAdmin = true;
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const [isAdminMenuOpen, setAdminMenuOpen] = useState(false);
+  const userMenuRef = useRef();
 
   const toggleUserMenu = () => setUserMenuOpen((prev) => !prev);
   const toggleAdminMenu = () => setAdminMenuOpen((prev) => !prev);
@@ -115,10 +116,25 @@ function LoginMenu({ navLinkClass, activeLinkClass }) {
   const dropdownLinkClass =
     "block w-full text-left px-4 py-2 text-lg font-primary font-semibold text-primary dark:text-light hover:bg-gray-100 dark:hover:bg-gray-600";
 
+  const handleClickOutside = (event) => {
+    if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+      setUserMenuOpen(false);
+      setAdminMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       {isAuthenticated ? (
-        <div className="relative">
+        <div className="relative" ref={userMenuRef}>
           <button
             className="relative text-primary cursor-pointer"
             onClick={toggleUserMenu}
