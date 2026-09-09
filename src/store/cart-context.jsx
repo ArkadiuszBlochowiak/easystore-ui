@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
     try {
       const storedCart = localStorage.getItem("cart");
       return storedCart ? JSON.parse(storedCart) : [];
-    } catch {
+    } catch (error) {
       console.error("Failed to parse cart from localStorage: " + error);
       return [];
     }

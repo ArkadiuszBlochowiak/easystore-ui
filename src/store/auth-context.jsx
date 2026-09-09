@@ -34,7 +34,7 @@ const authReducer = (prevState, action) => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const initialAuthState = () => {
+  const [authState, dispatch] = useReducer(authReducer, authEmptyState, () => {
     try {
       const jwtToken = localStorage.getItem("jwtToken");
       const user = localStorage.getItem("user");
@@ -45,23 +45,17 @@ export const AuthProvider = ({ children }) => {
           isAuthenticated: true,
         };
       }
-    } catch {
+    } catch (error) {
       console.error("Failed to load from localStorage: " + error);
     }
     return authEmptyState;
-  };
-
-  const [authState, dispatch] = useReducer(
-    authReducer,
-    authEmptyState,
-    initialAuthState,
-  );
+  });
 
   useEffect(() => {
     try {
       if (authState.isAuthenticated) {
         localStorage.setItem("jwtToken", authState.jwtToken);
-        localStorage.setItem("user", authState.user);
+        localStorage.setItem("user", JSON.stringify(authState.user));
       } else {
         localStorage.removeItem("jwtToken");
         localStorage.removeItem("user");
