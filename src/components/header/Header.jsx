@@ -105,6 +105,7 @@ function DarkModeSwitch() {
 function LoginMenu({ navLinkClass, activeLinkClass }) {
   const { isAuthenticated } = useAuth();
 
+  const isAdmin = true;
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const [isAdminMenuOpen, setAdminMenuOpen] = useState(false);
 
@@ -141,32 +142,37 @@ function LoginMenu({ navLinkClass, activeLinkClass }) {
                     Orders
                   </Link>
                 </li>
-                <li>
-                  <button
-                    className={`${dropdownLinkClass} flex items-center justify-between cursor-pointer`}
-                    onClick={toggleAdminMenu}
-                  >
-                    Admin
-                    <FontAwesomeIcon icon={faAngleDown} />
-                  </button>
-                  {isAdminMenuOpen && (
-                    <ul className="ml-4 space-y-2">
-                      <li>
-                        <Link to="/admin/orders" className={dropdownLinkClass}>
-                          Orders
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/admin/messages"
-                          className={dropdownLinkClass}
-                        >
-                          Messages
-                        </Link>
-                      </li>
-                    </ul>
-                  )}
-                </li>
+                {isAdmin && (
+                  <li>
+                    <button
+                      className={`${dropdownLinkClass} flex items-center justify-between cursor-pointer`}
+                      onClick={toggleAdminMenu}
+                    >
+                      Admin
+                      <FontAwesomeIcon icon={faAngleDown} />
+                    </button>
+                    {isAdminMenuOpen && (
+                      <ul className="ml-4 space-y-2">
+                        <li>
+                          <Link
+                            to="/admin/orders"
+                            className={dropdownLinkClass}
+                          >
+                            Orders
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/admin/messages"
+                            className={dropdownLinkClass}
+                          >
+                            Messages
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
+                  </li>
+                )}
                 <li>
                   <Link to="/" className={dropdownLinkClass}>
                     Logout
