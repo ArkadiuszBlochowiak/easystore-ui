@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import PageTitle from "./heading/PageTitle";
+import PageTitle from "../../../components/heading/PageTitle";
 import {
   Link,
   Form,
@@ -7,9 +7,8 @@ import {
   useNavigation,
   useNavigate,
 } from "react-router-dom";
-import apiClient from "../api/apiClient";
 import { toast } from "react-toastify";
-import { useAuth } from "../store/auth-context";
+import { useAuth } from "../../../store/auth-context";
 
 export default function Login() {
   const actionData = useActionData();
@@ -99,32 +98,4 @@ export default function Login() {
       </div>
     </div>
   );
-}
-
-export async function loginAction({ request }) {
-  const data = await request.formData();
-
-  const loginData = {
-    username: data.get("username"),
-    password: data.get("password"),
-  };
-
-  try {
-    const response = await apiClient.post("/auth/login", loginData);
-    const { message, user, jwtToken } = response.data;
-    return { success: true, message, user, jwtToken };
-  } catch (error) {
-    if (error.response?.status === 401) {
-      return {
-        success: false,
-        errors: { message: "Invalid username or password" },
-      };
-    }
-    throw new Response(
-      error.response?.data?.message ||
-        error.message ||
-        "Failed to login. Please try again.",
-      { status: error.response?.status || 500 },
-    );
-  }
 }

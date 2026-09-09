@@ -5,7 +5,9 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./components/About.jsx";
 import Contact from "./features/contact/components/Contact.jsx";
-import Login, { loginAction } from "./components/Login.jsx";
+import Login from "./features/login/components/Login.jsx";
+import Register from "./features/login/components/Register.jsx";
+import { loginAction, registerAction } from "./features/login/utils/utils.js";
 import Cart from "./features/cart/components/Cart.jsx";
 import Home from "./features/home/components/Home.jsx";
 import { productsLoader } from "./features/home/utils/utils.js";
@@ -45,6 +47,11 @@ const router = createBrowserRouter([
         path: "login",
         Component: Login,
         action: loginAction,
+      },
+      {
+        path: "register",
+        Component: Register,
+        action: registerAction,
       },
       {
         path: "cart",
