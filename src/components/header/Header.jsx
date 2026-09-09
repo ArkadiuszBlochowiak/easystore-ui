@@ -7,9 +7,10 @@ import {
   faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../../store/cart-context";
 import { useAuth } from "../../store/auth-context";
+import { toast } from "react-toastify";
 
 export default function Header() {
   const { totalQuantity } = useCart();
@@ -103,7 +104,8 @@ function DarkModeSwitch() {
 }
 
 function LoginMenu({ navLinkClass, activeLinkClass }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
   const isAdmin = true;
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
@@ -116,11 +118,22 @@ function LoginMenu({ navLinkClass, activeLinkClass }) {
   const dropdownLinkClass =
     "block w-full text-left px-4 py-2 text-lg font-primary font-semibold text-primary dark:text-light hover:bg-gray-100 dark:hover:bg-gray-600";
 
+  const hideMenu = () => {
+    setUserMenuOpen(false);
+    setAdminMenuOpen(false);
+  };
+
   const handleClickOutside = (event) => {
     if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-      setUserMenuOpen(false);
-      setAdminMenuOpen(false);
+      hideMenu();
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    toast.success("Logged out successfully!");
+    hideMenu();
+    navigate("/");
   };
 
   useEffect(() => {
@@ -190,9 +203,9 @@ function LoginMenu({ navLinkClass, activeLinkClass }) {
                   </li>
                 )}
                 <li>
-                  <Link to="/" className={dropdownLinkClass}>
+                  <button className={dropdownLinkClass} onClick={handleLogout}>
                     Logout
-                  </Link>
+                  </button>
                 </li>
               </ul>
             </div>
