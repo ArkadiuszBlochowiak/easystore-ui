@@ -15,6 +15,7 @@ import ProductDetail from "./features/home/components/product/ProductDetail.jsx"
 import { CartProvider } from "./store/cart-context";
 import { AuthProvider } from "./store/auth-context.jsx";
 import CheckoutForm from "./components/CheckoutForm.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -50,8 +51,13 @@ const router = createBrowserRouter([
         Component: ProductDetail,
       },
       {
-        path: "checkout",
-        Component: CheckoutForm,
+        Component: ProtectedRoute,
+        children: [
+          {
+            path: "checkout",
+            Component: CheckoutForm,
+          },
+        ],
       },
     ],
   },
