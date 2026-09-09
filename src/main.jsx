@@ -14,6 +14,7 @@ import { contactAction } from "./features/contact/utils/utils.js";
 import ProductDetail from "./features/home/components/product/ProductDetail.jsx";
 import { CartProvider } from "./store/cart-context";
 import { AuthProvider } from "./store/auth-context.jsx";
+import CheckoutForm from "./components/CheckoutForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "products/:productId",
         Component: ProductDetail,
+      },
+      {
+        path: "checkout",
+        Component: CheckoutForm,
       },
     ],
   },
