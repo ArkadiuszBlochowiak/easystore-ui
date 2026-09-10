@@ -104,7 +104,7 @@ function DarkModeSwitch() {
 }
 
 function LoginMenu({ navLinkClass, activeLinkClass }) {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
 
   const isAdmin = true;
@@ -152,7 +152,9 @@ function LoginMenu({ navLinkClass, activeLinkClass }) {
             className="relative text-primary cursor-pointer"
             onClick={toggleUserMenu}
           >
-            <span className={navLinkClass}>Hello John Doe</span>
+            <span className={navLinkClass}>
+              {`Hello ${user.name.length > 5 ? `${user.name.slice(0, 5)}...` : user.name}`}
+            </span>
             <FontAwesomeIcon
               icon={faAngleDown}
               className="text-primary dark:text-light w-6 h-6"

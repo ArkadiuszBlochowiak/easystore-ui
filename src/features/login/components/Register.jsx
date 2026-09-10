@@ -132,7 +132,7 @@ export default function Register() {
               placeholder="Your Password"
               required
               autoComplete="new-password"
-              minLength={8}
+              minLength={5}
               maxLength={20}
               className={textFieldStyle}
             />
