@@ -65,7 +65,7 @@ export default function Profile() {
               setProfileData((prev) => ({ ...prev, name: e.target.value }))
             }
             required
-            minLength={5}
+            minLength={4}
             maxLength={30}
           />
           {actionData?.errors?.name && (
@@ -106,8 +106,8 @@ export default function Profile() {
               name="mobileNumber"
               type="tel"
               required
-              pattern="^\d{10}$"
-              title="Mobile number must be exactly 10 digits"
+              pattern="^\d{9}$"
+              title="Mobile number must be exactly 9 digits"
               value={profileData.mobileNumber}
               onChange={(e) =>
                 setProfileData((prev) => ({

@@ -76,6 +76,9 @@ const router = createBrowserRouter([
             Component: Profile,
             loader: profileLoader,
             action: profileAction,
+            shouldRevalidate: ({ actionResult }) => {
+              return !actionResult?.success;
+            },
           },
           {
             path: "orders",
