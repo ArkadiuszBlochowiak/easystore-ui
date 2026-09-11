@@ -7,7 +7,7 @@ import {
   faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../../store/cart-context";
 import { useAuth } from "../../store/auth-context";
 import { toast } from "react-toastify";
@@ -106,6 +106,7 @@ function DarkModeSwitch() {
 function LoginMenu({ navLinkClass, activeLinkClass }) {
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const isAdmin = true;
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
@@ -135,6 +136,10 @@ function LoginMenu({ navLinkClass, activeLinkClass }) {
     hideMenu();
     navigate("/");
   };
+
+  useEffect(() => {
+    hideMenu();
+  }, [location.pathname]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
