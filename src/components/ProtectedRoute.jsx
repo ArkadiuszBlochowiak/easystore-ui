@@ -7,9 +7,11 @@ export default function ProtectedRoute() {
   const location = useLocation();
 
   useEffect(() => {
-    if (!isAuthenticated && location.pathname !== "/login") {
+    const skipRedirect = sessionStorage.getItem("skipRedirectPath") === "true";
+    if (!isAuthenticated && location.pathname !== "/login" && !skipRedirect) {
       sessionStorage.setItem("redirectPath", location.pathname);
     }
+    sessionStorage.removeItem("skipRedirectPath");
   }, [isAuthenticated, location.pathname]);
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
