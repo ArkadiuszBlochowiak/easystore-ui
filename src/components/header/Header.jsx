@@ -108,7 +108,7 @@ function LoginMenu({ navLinkClass, activeLinkClass }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isAdmin = true;
+  const isAdmin = user?.roles?.includes("ROLE_ADMIN");
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const [isAdminMenuOpen, setAdminMenuOpen] = useState(false);
   const userMenuRef = useRef();

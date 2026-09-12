@@ -71,7 +71,7 @@ export default function Register() {
               name="name"
               placeholder="Your Name"
               required
-              minLength={5}
+              minLength={4}
               maxLength={30}
               className={textFieldStyle}
             />
