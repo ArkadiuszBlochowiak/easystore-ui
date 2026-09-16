@@ -50,6 +50,9 @@ export default function CheckoutForm() {
         fontSize: "16px",
         color: isDarkMode ? "#E5E7EB" : "#374151",
         backgroundColor: isDarkMode ? "#4B5563" : "#FFFFFF",
+        "::placeholder": {
+          color: isDarkMode ? "#C9C9C9" : "#A1A1A1",
+        },
       },
       invalid: {
         color: "#F87171",
