@@ -25,6 +25,12 @@ import Profile, {
 import Orders from "./components/Orders.jsx";
 import AdminOrders from "./components/admin/AdminOrders.jsx";
 import Messages from "./components/admin/Messages.jsx";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51UGF5tIoC4Y3ast2V086EXJfEGsu57gEFGDR8kTBhaigVZ1eFt9TURqeKfOIlGjBB76AEIWvfrtdOlQgHVXp4AjJ00f2u9ZxGK",
+);
 
 const router = createBrowserRouter([
   {
@@ -100,10 +106,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <CartProvider>
-        <RouterProvider router={router} />
-      </CartProvider>
-    </AuthProvider>
+    <Elements stripe={stripePromise}>
+      <AuthProvider>
+        <CartProvider>
+          <RouterProvider router={router} />
+        </CartProvider>
+      </AuthProvider>
+    </Elements>
   </StrictMode>,
 );
