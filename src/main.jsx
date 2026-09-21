@@ -16,7 +16,6 @@ import { contactAction } from "./features/contact/utils/utils.js";
 import ProductDetail from "./features/home/components/product/ProductDetail.jsx";
 import { CartProvider } from "./store/cart-context";
 import { AuthProvider } from "./store/auth-context.jsx";
-import CheckoutForm from "./components/CheckoutForm.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Profile, {
   profileAction,
@@ -27,6 +26,8 @@ import AdminOrders from "./components/admin/AdminOrders.jsx";
 import Messages from "./components/admin/Messages.jsx";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import OrderSuccess from "./features/cart/components/OrderSuccess.jsx";
+import CheckoutForm from "./features/cart/components/CheckoutForm.jsx";
 
 const stripePromise = loadStripe(
   "pk_test_51UGF5tIoC4Y3ast2V086EXJfEGsu57gEFGDR8kTBhaigVZ1eFt9TURqeKfOIlGjBB76AEIWvfrtdOlQgHVXp4AjJ00f2u9ZxGK",
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
           {
             path: "checkout",
             Component: CheckoutForm,
+          },
+          {
+            path: "order-success",
+            Component: OrderSuccess,
           },
           {
             path: "profile",

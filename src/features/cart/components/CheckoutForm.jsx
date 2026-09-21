@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "../store/auth-context";
-import apiClient from "../api/apiClient";
-import { useCart } from "../store/cart-context";
+import { useAuth } from "../../../store/auth-context";
+import apiClient from "../../../api/apiClient";
+import { useCart } from "../../../store/cart-context";
 import {
   useStripe,
   useElements,
@@ -10,7 +10,7 @@ import {
   CardCvcElement,
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
-import PageTitle from "./heading/PageTitle";
+import PageTitle from "../../../components/heading/PageTitle";
 import { toast } from "react-toastify";
 
 export default function CheckoutForm() {
@@ -116,24 +116,25 @@ export default function CheckoutForm() {
         setErrorMessage(error.message || "Payment failed. Please try again.");
       } else if (paymentIntent && paymentIntent.status === "succeeded") {
         toast.success("Payment successful!");
-        try {
-          await apiClient.post("/orders", {
-            totalPrice: totalPrice,
-            paymentId: paymentIntent.id,
-            paymentStatus: paymentIntent.status,
-            items: cart.map((item) => ({
-              productId: item.productId,
-              quantity: item.quantity,
-              price: item.price,
-            })),
-          });
-          sessionStorage.setItem("skipRedirectPath", "true");
-          clearCart();
-          navigate("/order-success");
-        } catch (orderError) {
-          console.error("Failed to create order:", orderError);
-          setErrorMessage("Order creation failed. Please contact support.");
-        }
+        navigate("/order-success");
+        // try {
+        //   await apiClient.post("/orders", {
+        //     totalPrice: totalPrice,
+        //     paymentId: paymentIntent.id,
+        //     paymentStatus: paymentIntent.status,
+        //     items: cart.map((item) => ({
+        //       productId: item.productId,
+        //       quantity: item.quantity,
+        //       price: item.price,
+        //     })),
+        //   });
+        //   sessionStorage.setItem("skipRedirectPath", "true");
+        //   clearCart();
+        // navigate("/order-success");
+        // } catch (orderError) {
+        //   console.error("Failed to create order:", orderError);
+        //   setErrorMessage("Order creation failed. Please contact support.");
+        // }
       }
     } catch (error) {
       setErrorMessage("Error processing payment. Please try again later.");
