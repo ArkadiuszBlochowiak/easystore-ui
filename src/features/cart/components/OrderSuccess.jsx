@@ -4,7 +4,7 @@ import PageTitle from "../../../components/heading/PageTitle";
 
 export default function OrderSuccess() {
   return (
-    <div className="min-h-213  py-12 sm:pt-20 font-primary bg-normalbg dark:bg-darkbg">
+    <div className="grow min-h-213  py-12 sm:pt-20 font-primary bg-normalbg dark:bg-darkbg">
       <div className="max-w-4xl mx-auto px-4">
         <PageTitle text="Hurray! Order placed successfully" />
       </div>
