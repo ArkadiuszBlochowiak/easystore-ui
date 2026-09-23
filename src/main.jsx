@@ -25,7 +25,7 @@ import Orders, { ordersLoader } from "./components/Orders.jsx";
 import AdminOrders, {
   adminOrdersLoader,
 } from "./components/admin/AdminOrders.jsx";
-import Messages from "./components/admin/Messages.jsx";
+import Messages, { messagesLoader } from "./components/admin/Messages.jsx";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import OrderSuccess from "./features/cart/components/OrderSuccess.jsx";
@@ -106,6 +106,7 @@ const router = createBrowserRouter([
           {
             path: "admin/messages",
             Component: Messages,
+            loader: messagesLoader,
           },
         ],
       },
