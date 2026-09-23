@@ -21,7 +21,7 @@ import Profile, {
   profileAction,
   profileLoader,
 } from "./components/Profile.jsx";
-import Orders from "./components/Orders.jsx";
+import Orders, { ordersLoader } from "./components/Orders.jsx";
 import AdminOrders from "./components/admin/AdminOrders.jsx";
 import Messages from "./components/admin/Messages.jsx";
 import { loadStripe } from "@stripe/stripe-js";
@@ -94,6 +94,7 @@ const router = createBrowserRouter([
           {
             path: "orders",
             Component: Orders,
+            loader: ordersLoader,
           },
           {
             path: "admin/orders",
